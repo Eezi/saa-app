@@ -67,7 +67,7 @@ class App extends Component {
                   <img style={{margin: '10px'}} alt={`${country.name} flag`} src={country.flag} width="200" />
                 </div>
               ))
-              : 'Ei löytynyt vaihtoehtoja.'  
+              : 'No matches were found.'  
           }           
         </div>    
     </div>
