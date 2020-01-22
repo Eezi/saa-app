@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css'
+import classes from './App.module.css'
 import axios from 'axios'
-import { render } from '@testing-library/react';
+
 
 class App extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class App extends Component {
           searchTerm: ''
         }
       }
-  //Tämän lifecycle hookin avulla haetaan data 
+  //Tämän lifecycle hookin avulla haetaan data tietokannasta
   componentDidMount() {
     axios
       .get('https://restcountries.eu/rest/v2/all')
@@ -19,47 +19,52 @@ class App extends Component {
         this.setState({countries: response.data})
       });
   }
+  //Tämän metodin avulla osataan yhdistää maan nimi ja input arvoon.
   handleChange = ({target: {name, value}}) => {
     this.setState({[name]: value})
   }
-
+  //löytää hakemat myös pienillä kirjaimilla
 	handleResultClick = ( countryName ) => {
 		this.setState({ searchTerm: countryName.toLowerCase() });
 	}
 
   render() {
+    //Tässä ensiksi haetaan maiden data ja tehdään lista vain maiden nimistä ja muutetaan niiden kirjaimet pieniksi, samoin hakusanat pieniksi
     const countriesToShow = this.state.countries.filter(country => country.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
   
   return (
-    <div>
-        <h1>Maat</h1>
-
+    <div className={classes.Container}>
         
-            Etsi maita: <input name="searchTerm" value={this.state.searchTerm} onChange={this.handleChange} />  
+
+            
+            <input placeholder="Find a country..." className={classes.Inputti} name="searchTerm" value={this.state.searchTerm} onChange={this.handleChange} />  
         <div>
-            {
-              countriesToShow.length > 10 
-              ? 'Liian monta vaihtoehtoa, tarkenna tietoa.'
+            { //Jos maita löytyy enemmän kuin 10 niin tulostaa tarkenna tietoa
+               countriesToShow.length > 10 
+              ? 'Too many matches, specify another filter.'
+              //Jos löydettujen maiden määrä on suurempi kuin 1 niin se ehdottaa vaihtoehtoina löydetyt
               : countriesToShow.length > 1
+              //Ja muutetaan vaihtoehdot napeiksi, joita voi valita
               ? countriesToShow.map(country => (
                   <button
                     key={country.name}
                     name="searchTerm"
                     value={country.name}
                     onClick={this.handleChange}
-                    style={{border: '0', display: 'block'}}
+                    style={{margin: '10px', padding: '10px', fontSize: '1rem', borderRadius: '10px', border: 'solid, 1px', display: 'block'}}
                     >
                       {country.name}
                     
                   </button>
               ))
+              //Jos haku löytää tasan yhden oikean vaihtoehdon niin tulostetaan tiedot
               : countriesToShow.length === 1
               ? countriesToShow.map(country => (
-                <div>
+                <div key={country.name}>
                   <h2>{country.name}</h2>
-                  <p>Maan pääkaupunki on: {country.capital}</p>
+                  <p style={{margin: '10px'}}>Maan pääkaupunki on: {country.capital}</p>
                   <p>Maan väkiluku on: {country.population}</p>
-                  <img alt={`${country.name} flag`} src={country.flag} width="200" />
+                  <img style={{margin: '10px'}} alt={`${country.name} flag`} src={country.flag} width="200" />
                 </div>
               ))
               : 'Ei löytynyt vaihtoehtoja.'  
