@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import classes from './Saat.module.css';
+import {Route, Link} from 'react-router-dom';
 
 class Saat extends Component {
     constructor(props) {
@@ -27,13 +29,14 @@ handleResultClick = ( countryName ) => {
 
 render() {
 //Etsii osuvat kaupungit
-const showCity = this.state.citys.filter(country => country.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+//const showCity = this.state.citys.filter(country => country.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
 
 return(
-    <div>
-        <input onChange={this.handleChange} type='text' name="searchTerm" value={this.state.searchTerm} />
+    <div className={classes.Scontainer}>
+        <input className={classes.Inputti} onChange={this.handleChange} type='text' name="searchTerm" value={this.state.searchTerm} />
         <div>
-        {
+        
+        {/*
             showCity.length > 10 
             ? 'Liian monta tulosta löydetty, tarkenna hakua' 
             : showCity > 1
@@ -54,8 +57,8 @@ return(
                 </div>
             ))
             : 'No matches were found.'  
-
-        }
+     */}       
+        
         </div>
     </div>
 

@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import Saat from './Saat/Saat'
-import Maat from './Maat/Maat'
+import {BrowserRouter} from 'react-router-dom';
+import Etusivu from './Container/Etusivu';
 
 
 class App extends Component {
   render() {
   return (
-    <div>
-        <Maat />
-        <Saat />
+    <BrowserRouter>
+    <div className="App">
+        <Etusivu />
+        
     </div>
+    </BrowserRouter>
   );
   }
 }

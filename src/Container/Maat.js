@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classes from './Maat.module.css'
 import axios from 'axios'
 import {Route, Link} from 'react-router-dom';
-import Saat from '../Saat/Saat';
+import Saat from './Saat/Saat'
 
 
 class Maat extends Component {
@@ -37,8 +37,6 @@ class Maat extends Component {
     const text = 'Too many matches, specify another filter.';
   return (
     <div className={classes.Container}>
-        
-    
             
             <input placeholder="Find a country..." className={classes.Inputti} name="searchTerm" value={this.state.searchTerm} onChange={this.handleChange} />  
         <div>
@@ -72,7 +70,7 @@ class Maat extends Component {
               ))
               : 'No matches were found.'  
           }   
-           <Route path="/saat" exact component={Saat} />
+           
         </div>    
     </div>
   );
