@@ -64,6 +64,7 @@ class App extends Component {
                   <h2>{country.name}</h2>
                   <h1>Terve</h1>
                   <h2>Toisen branchin muutos!</h2>
+                  <h3>Kolmas muutos!</h3>
                   <p style={{margin: '10px'}}>Maan pääkaupunki on: {country.capital}</p>
                   <p>Maan väkiluku on: {country.population}</p>
                   <img style={{margin: '10px'}} alt={`${country.name} flag`} src={country.flag} width="200" />
